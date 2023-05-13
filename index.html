@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>SKINWAY</title>
+      <link rel="stylesheet" href="style.css">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   </head>
+   <body>
+      <div class="header">
+         <div class="Home">
+            <div class="navbar">
+               <div class="logo">
+                  <img src="pictures/logo.png" width="100px">
+               </div>
+               <nav>
+                  <ul>
+                  <li><a href="">Home</a></li>
+                  <li><a href="">Products</a></li>
+                  <li><a href="">About</a></li>
+                  <li><a href="">Contact</a></li>
+                  <li><a href="C:\Users\New User\Desktop\the original skinway project\log in.html">Log in</a></li>
+                  <li><a href="C:\Users\New User\Documents\signup.html">Sign up</a></li>
+                  <li><a href="C:\Users\New User\Desktop\the original skinway project\check out.html">Check out<a></li>
+               </nav>
+               <a href="cart.html" id="cart-icon"><img src="pictures/cart.png" width="30px" height="30px"> <span></span></a>
+               <a href="checkout.html"></a>
+            </div>
+            <div id="About">
+               <h3>Giving you the essentials your<br>skin needs to glow!</h3>
+               <a href=""class="btn">Welcome</a>
+               <!-- <div class="col-2"> -->
+               <!-- <img src="pictures/another skinn2.png"
+                  width="800" 
+                  height="900" /> -->
+               <footer>
+                  <h4>Copyright Feranmi studios 2022</h4>
+               </footer>
+            </div>
+         </div>
+      </div>
+      <!--------featured categories---->
+      <div class="categories">
+         <div class="small-container">
+            <div class="row homepage-images">
+               
+            </div>
+         </div>
+      </div>
+      <!-------featured products-->
+      <div class="small-container">
+            <h2 class="title">Featured Products</h2>
+            <div class="row featured-products">
+                
+            </div>
+
+            <h2 class="title">Latest Products</h2>
+            <div class="row latest-products">
+                
+            </div>
+            <!----------offer-------> 
+            <div class="offer"></div>
+            <div class="small-container">
+                <h2 class="title">OUR OFFER</h2>
+                <div class="row">
+                    <div class="col-2">
+                    <img src="pictures/medi-peel tretinion.jpg">
+                    </div>
+                    <div class="col-2">
+                    <p>Exclusively Available On Skinway</p>
+                    <h1>Medi-Peel tretinion</h1>
+                    <small>Tretinoin is used to treat acne or other skin diseases as determined by your<br>doctor.
+                    It works partly by keeping skin pores clear. </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+      <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            PRODUCT DETAILS
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+      <script src="scripts.js"></script>
+
+        <script src="data.js"></script>
+
+        <script type="text/javascript">
+            window.addEventListener("DOMContentLoaded", function(){
+                // load images
+                document.querySelector(".homepage-images").innerHTML = `
+                    <div class="col mb-5 text-center p-5">
+                        <i class="fa fa-spinner fa-spin fa-4x" style="color:#ff523b;"></i>
+                    </div>
+                `;
+
+                var homepage_images = '';
+                homepageImages.forEach(function(image){
+                    homepage_images += `
+                        <div class="col-3">
+                            <img src="${image}">
+                        </div>
+                    `;
+                })
+
+                // console.log("html", homepage_images);
+
+                window.setTimeout(function(){
+                    document.querySelector(".homepage-images").innerHTML = homepage_images;
+                }, 500);
+
+
+                // load featured products
+                // console.log("products", products);
+
+                document.querySelector(".featured-products").innerHTML = `
+                    <div class="col mb-5 text-center p-5">
+                        <i class="fa fa-spinner fa-spin fa-4x" style="color:#ff523b;"></i>
+                    </div>
+                `;
+
+                var featuredProducts = '';
+                products.filter(function(product){
+                    return product['category'].indexOf("featured products") > -1;
+                }).forEach(function(product){
+                    featuredProducts += `
+                        <div class="col-3">
+                            <img src="${product.main_image}">
+                            <h4>${product.name}</h4>
+                            <p> &#8358; ${product.price} </p>
+                            <a class="btn btn-primary m-0" href="product.html?product=${product.sku}">View</a>
+                        </div>
+                    `;
+                })
+
+                // console.log("html", featuredProducts);
+
+                window.setTimeout(function(){
+                    document.querySelector(".featured-products").innerHTML = featuredProducts;
+                }, 500);
+
+
+                // 
+                // load latest products
+
+                document.querySelector(".latest-products").innerHTML = `
+                    <div class="col mb-5 text-center p-5">
+                        <i class="fa fa-spinner fa-spin fa-4x" style="color:#ff523b;"></i>
+                    </div>
+                `;
+
+                var latestProducts = '';
+                products.filter(function(product){
+                    return product['category'].indexOf("latest products") > -1;
+                }).forEach(function(product){
+                    latestProducts += `
+                        <div class="col-3">
+                            <img src="${product.main_image}">
+                            <h4>${product.name}</h4>
+                            <p> &#8358; ${product.price} </p>
+                            <a class="btn btn-primary m-0" href="product.html?product=${product.sku}">View</a>
+                        </div>
+                    `;
+                })
+
+                // console.log("html", latestProducts);
+
+                window.setTimeout(function(){
+                    document.querySelector(".latest-products").innerHTML = latestProducts;
+                }, 500);
+
+            });
+        </script>
+   </body>
+</html>

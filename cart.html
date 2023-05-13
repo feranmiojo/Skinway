@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>SKINWAY</title>
+      <link rel="stylesheet" href="style.css">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   </head>
+   <body>
+      <div class="header">
+         <div class="Home">
+            <div class="navbar">
+               <div class="logo">
+                  <img src="pictures/logo.png" width="100px">
+               </div>
+               <nav>
+                  <ul>
+                  <li><a href="">Home</a></li>
+                  <li><a href="">Products</a></li>
+                  <li><a href="">About</a></li>
+                  <li><a href="">Contact</a></li>
+                  <li><a href="">Log in</a></li>
+                  <li><a href="">Sign up</a></li>
+               </nav>
+               <a href="cart.html" id="cart-icon"><img src="pictures/cart.png" width="30px" height="30px"> <span></span></a>
+               <a href="checkout.html"></a>
+            </div>
+         </div>
+      </div>
+
+      <div class="container mt-5">
+         <div class="row">
+            <div class="col-md-12">
+                <table class="table table-responsive" style="width: 100%;" border="1">
+                    <tbody><tr id="cart-header">
+                        <td>Product</td>
+                        <td>Qty</td>
+                        <td>Subtotal</td>
+                    </tr>
+                    <!-- <tr>
+                        <td>Lorem ipsum dolor sit amet consectetur</td>
+                        <td><button class="qty-btn">-</button> 1 <button class="qty-btn">+</button></td>
+                        <td>100,000</td>
+                    </tr>
+                    <tr>
+                        <td>Sed ut perspiciatis unde omnis iste natus</td>
+                        <td><button class="qty-btn">-</button> 2 <button class="qty-btn">+</button></td>
+                        <td>20,000</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right">Total:</td>
+                        <td>120,000</td>
+                    </tr> -->
+                </tbody></table>
+            </div>
+         </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+      <script src="scripts.js"></script>
+
+        <script src="data.js"></script>
+
+      <script type="text/javascript">
+        function loadCart(){
+            // console.log("cart", cart);
+
+            document.querySelector(".table tbody").innerHTML = `
+              <div class="row">
+                <div class="col mb-5 text-center p-5">
+                  <i class="fa fa-spinner fa-spin fa-4x" style="color:#ff523b;"></i>
+                </div>
+              </div>
+            `;
+
+            var formattedCartHtml = '', total = 0;
+            cart.forEach(function(product){
+                formattedCartHtml += `
+                  <tr>
+                        <td>${product.name}</td>
+                        <td>
+                            <div class="d-flex mb-4" style="max-width: 300px; align-items: baseline;">
+                                <button class="btn btn-secondary" onclick="stepDown('${product.sku}')">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+
+                                <div class="form-outline">
+                                <input id="${product.sku}-qty" min="1" name="quantity" value="${product.qty}" type="number" class="form-control" />
+                                </div>
+
+                                <button class="btn btn-secondary" onclick="stepUp('${product.sku}')">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>    
+                        </td>
+                        <td>
+                            <p class="text-start text-md-center">
+                                <strong>N ${product.price * product.qty}</strong>
+                            </p>
+                        </td>
+                    </tr>
+                `;
+
+                total += product.price * product.qty ;
+            })
+
+            // console.log("html", formattedCartHtml);
+
+            window.setTimeout(function(){
+                let table_header = `<tr id="cart-header">
+                        <td>Product</td>
+                        <td>Qty</td>
+                        <td>Subtotal</td>
+                    </tr>`;
+                
+                let table_footer = `<tr>
+                        <td colspan="2" align="right">Total:</td>
+                        <td>${total}</td>
+                    </tr>`;
+                
+                document.querySelector(".table tbody").innerHTML = table_header + formattedCartHtml + table_footer;
+            }, 500);
+
+        }
+
+        function updateCart(sku, qty){
+          let findProductInCart = cart.filter(function(product){
+              return product.sku == sku;
+          });
+
+          findProductInCart[0].qty = qty;
+
+          // save to localStorage
+          localStorage.setItem("shoppingCart", JSON.stringify(cart));
+
+          // refresh cart
+          loadCart();
+        }
+
+        function stepDown(sku){
+          // console.log(sku, "hello");
+          document.querySelector("#"+sku+"-qty").value = Number(document.querySelector("#"+sku+"-qty").value) - 1;
+          var qty = document.querySelector("#"+sku+"-qty").value;
+          // console.log("sku", sku, qty);
+          updateCart(sku, qty);
+        }
+
+        function stepUp(sku){
+          // console.log(sku, "hello");
+          document.querySelector("#"+sku+"-qty").value = Number(document.querySelector("#"+sku+"-qty").value) + 1;
+          var qty = document.querySelector("#"+sku+"-qty").value;
+          // console.log("sku", sku, qty);
+          updateCart(sku, qty);
+        }
+
+        loadCart();
+    </script>
+   </body>
+</html>
